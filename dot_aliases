@@ -1,0 +1,32 @@
+##### PERSONAL ALIASES ####
+
+alias av='query=""; \
+function _av() { \
+  set -o pipefail; \
+  local query_and_file=$(ag --vimgrep $@ | fzf --preview-window=up:60%:wrap --print-query --query "$query"); \
+  query=$(echo "$query_and_file" | sed -n '1p'); \
+  local file=$(echo "$query_and_file" | sed -n '2p'); \
+  [ -z "$file" ] && [ -z "$query" ] && return; \
+  (echo "$file" | awk -F ":" '\''{print "nvim +" $2 " " $1}'\'' | sh); \
+  _av $@; \
+}; _av'
+
+alias sv='query=""; \
+function _sv() { \
+  set -o pipefail; \
+
+  local query_and_file=$(sg -p $@ | fzf --preview-window=up:60%:wrap --print-query --query "$query"); \
+  query=$(echo "$query_and_file" | sed -n '1p'); \
+  local file=$(echo "$query_and_file" | sed -n '2p'); \
+  [ -z "$file" ] && [ -z "$query" ] && return; \
+  (echo "$file" | awk -F ":" '\''{print "nvim +" $2 " " $1}'\'' | sh); \
+  _sv $@; \
+}; _sv'
+
+
+alias note='note=$(notes find | fzf) && [ -n "$note" ] && notes open "$note"'
+# alias note='glow ~/notes'
+alias lg='lazygit'
+alias fv='function _fv() { local query="$1"; local query_and_file=$(fd --type f --strip-cwd-prefix --hidden --follow --exclude .git | fzf --print-query --query "$query"); query=$(echo "$query_and_file" | sed -n '1p'); local file=$(echo "$query_and_file" | sed -n '2p'); [ -z "$query" ] && [ -z "$file" ] && return; [ -n "$file" ] && nvim "$file" && _fv "$query"; }; _fv'
+alias lenv='function _lenv() { set -o pipefail; loadenv $1 | pbcopy && echo "Copied source env variables script to your clipboard! Paste into any shell" }; _lenv'
+alias npm-scripts='function f() {cat $1 | jq ".scripts";}; f'
