@@ -25,9 +25,8 @@ require('lazy').setup {
   require 'custom.plugins.misc',
 }
 
-
-require('custom.settings')
-require('custom.keymaps')
+require 'custom.settings'
+require 'custom.keymaps'
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

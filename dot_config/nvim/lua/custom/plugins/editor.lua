@@ -91,7 +91,9 @@ return {
       }
     end,
   },
-
+  {
+    'nvim-pack/nvim-spectre',
+  }
   -- {
   --   'Shatur/neovim-session-manager',
   --   config = function()

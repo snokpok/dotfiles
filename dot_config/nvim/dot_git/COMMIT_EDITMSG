@@ -1,4 +1,4 @@
-refactoring
+
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
 #
@@ -7,190 +7,64 @@ refactoring
 #
 # Changes to be committed:
 #	modified:   init.lua
-#	new file:   lua/custom/keymaps.lua
-#	modified:   lua/custom/plugins/lang.lua
-#	new file:   lua/custom/settings.lua
+#	modified:   lazy-lock.json
+#	modified:   lua/custom/keymaps.lua
+#	modified:   lua/custom/plugins/editor.lua
 #
 # ------------------------ >8 ------------------------
 # Do not modify or remove the line above.
 # Everything below it will be ignored.
 diff --git a/init.lua b/init.lua
-index e8a423b..d38349a 100644
+index d38349a..ec0e80c 100644
 --- a/init.lua
 +++ b/init.lua
-@@ -1,9 +1,3 @@
--vim.g.mapleader = ' '
--vim.g.maplocalleader = ' '
--
--vim.g.loaded_netrw = 1
--vim.g.loaded_netrwPlugin = 1
--
- -- [[ Install `lazy.nvim` plugin manager ]]
- --    https://github.com/folke/lazy.nvim
- --    `:help lazy.nvim.txt` for more info
-@@ -31,67 +25,9 @@ require('lazy').setup {
+@@ -25,9 +25,8 @@ require('lazy').setup {
    require 'custom.plugins.misc',
  }
  
---- [[ Setting options ]]
---- See `:help vim.o`
---- NOTE: You can change these options as you wish!
 -
---- Set highlight on search
--vim.o.hlsearch = true
--
---- Make line numbers default
--vim.wo.number = true
--
---- Enable mouse mode
--vim.o.mouse = 'a'
--
---- Sync clipboard between OS and Neovim.
----  Remove this option if you want your OS clipboard to remain independent.
----  See `:help 'clipboard'`
--vim.o.clipboard = 'unnamedplus'
--
---- Enable break indent
--vim.o.breakindent = true
--
---- Save undo history
--vim.o.undofile = true
--
---- Case-insensitive searching UNLESS \C or capital in search
--vim.o.ignorecase = true
--vim.o.smartcase = true
--
---- Keep signcolumn on by default
--vim.wo.signcolumn = 'yes'
--
---- Decrease update time
--vim.o.updatetime = 250
--vim.o.timeoutlen = 300
--
---- Set completeopt to have a better completion experience
--vim.o.completeopt = 'menuone,noselect'
--
---- NOTE: You should make sure your terminal supports this
--vim.o.termguicolors = true
--
---- relative line number
--vim.o.relativenumber = true
--
---- cursorline
--vim.wo.cursorline = true
--
---- [[ Basic Keymaps ]]
--
---- Keymaps for better default experience
---- See `:help vim.keymap.set()`
--vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
- 
---- Remap for dealing with word wrap
--vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
--vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
---- Diagnostic keymaps
--vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
--vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
--vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
--vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-+require('custom.settings')
-+require('custom.keymaps')
+-require('custom.settings')
+-require('custom.keymaps')
++require 'custom.settings'
++require 'custom.keymaps'
  
  -- [[ Highlight on yank ]]
  -- See `:help vim.highlight.on_yank()`
+diff --git a/lazy-lock.json b/lazy-lock.json
+index 2c0f9b1..907acc4 100644
+--- a/lazy-lock.json
++++ b/lazy-lock.json
+@@ -22,6 +22,7 @@
+   "none-ls.nvim": { "branch": "main", "commit": "ff3819c52ca04232fb70fbd6c1639de9abcbe122" },
+   "nvim-cmp": { "branch": "main", "commit": "04e0ca376d6abdbfc8b52180f8ea236cbfddf782" },
+   "nvim-lspconfig": { "branch": "master", "commit": "d12140c5687a1186b95b3f42dbc6cc769df0cf0d" },
++  "nvim-spectre": { "branch": "master", "commit": "026394a8458d62c6b7b305c076ce675420dbaa4c" },
+   "nvim-tree.lua": { "branch": "master", "commit": "030defdb6522f5f716d8201d20ca1a2baa57ca66" },
+   "nvim-treesitter": { "branch": "master", "commit": "0d14299a9de818b6ef1f37313eddb100edb1f974" },
+   "nvim-treesitter-textobjects": { "branch": "master", "commit": "8edd5a6d96936bdff23333d3bc177481388839e5" },
 diff --git a/lua/custom/keymaps.lua b/lua/custom/keymaps.lua
-new file mode 100644
-index 0000000..a78e6c2
---- /dev/null
+index a78e6c2..9061dcb 100644
+--- a/lua/custom/keymaps.lua
 +++ b/lua/custom/keymaps.lua
-@@ -0,0 +1,15 @@
-+-- [[ Basic Keymaps ]]
-+
-+-- Keymaps for better default experience
-+-- See `:help vim.keymap.set()`
-+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-+
-+-- Remap for dealing with word wrap
-+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-+-- Diagnostic keymaps
-+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-+
-diff --git a/lua/custom/plugins/lang.lua b/lua/custom/plugins/lang.lua
-index 98f4783..cf647a0 100644
---- a/lua/custom/plugins/lang.lua
-+++ b/lua/custom/plugins/lang.lua
-@@ -147,9 +147,8 @@ return {
+@@ -13,3 +13,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
+ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
  
-       null_ls.setup {
-         sources = {
--          null_ls.builtins.diagnostics.eslint,
-+          -- null_ls.builtins.diagnostics.eslint,
-           null_ls.builtins.formatting.prettier,
--          null_ls.builtins.completion.spell,
-         },
++vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
++    desc = "Toggle Spectre"
++})
+diff --git a/lua/custom/plugins/editor.lua b/lua/custom/plugins/editor.lua
+index dcf5625..847ff5b 100644
+--- a/lua/custom/plugins/editor.lua
++++ b/lua/custom/plugins/editor.lua
+@@ -91,7 +91,9 @@ return {
        }
      end,
-diff --git a/lua/custom/settings.lua b/lua/custom/settings.lua
-new file mode 100644
-index 0000000..f6c6d90
---- /dev/null
-+++ b/lua/custom/settings.lua
-@@ -0,0 +1,54 @@
-+-- [[ Setting options ]]
-+-- See `:help vim.o`
-+-- NOTE: You can change these options as you wish!
-+
-+vim.g.mapleader = ' '
-+vim.g.maplocalleader = ' '
-+
-+vim.g.loaded_netrw = 1
-+vim.g.loaded_netrwPlugin = 1
-+
-+
-+-- Set highlight on search
-+vim.o.hlsearch = true
-+
-+-- Make line numbers default
-+vim.wo.number = true
-+
-+-- Enable mouse mode
-+vim.o.mouse = 'a'
-+
-+-- Sync clipboard between OS and Neovim.
-+--  Remove this option if you want your OS clipboard to remain independent.
-+--  See `:help 'clipboard'`
-+vim.o.clipboard = 'unnamedplus'
-+
-+-- Enable break indent
-+vim.o.breakindent = true
-+
-+-- Save undo history
-+vim.o.undofile = true
-+
-+-- Case-insensitive searching UNLESS \C or capital in search
-+vim.o.ignorecase = true
-+vim.o.smartcase = true
-+
-+-- Keep signcolumn on by default
-+vim.wo.signcolumn = 'yes'
-+
-+-- Decrease update time
-+vim.o.updatetime = 250
-+vim.o.timeoutlen = 300
-+
-+-- Set completeopt to have a better completion experience
-+vim.o.completeopt = 'menuone,noselect'
-+
-+-- NOTE: You should make sure your terminal supports this
-+vim.o.termguicolors = true
-+
-+-- relative line number
-+vim.o.relativenumber = true
-+
-+-- cursorline
-+vim.wo.cursorline = true
-+
+   },
+-
++  {
++    'nvim-pack/nvim-spectre',
++  }
+   -- {
+   --   'Shatur/neovim-session-manager',
+   --   config = function()
