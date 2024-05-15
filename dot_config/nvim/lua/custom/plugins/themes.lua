@@ -1,4 +1,4 @@
-return {
+local config = {
   {
     'f-person/auto-dark-mode.nvim',
     config = function()
@@ -6,8 +6,10 @@ return {
         update_interval = 1000,
         set_dark_mode = function()
           vim.api.nvim_set_option('background', 'dark')
+	  vim.cmd("colorscheme no-clown-fiesta")
         end,
         set_light_mode = function()
+          vim.cmd('colorscheme vscode_modern')
           vim.api.nvim_set_option('background', 'light')
         end,
       }
@@ -46,7 +48,7 @@ return {
     name = 'rose-pine',
     opts = function()
       require("rose-pine").setup({
-        variant = "moon",  -- auto, main, moon, or dawn
+        variant = "auto",      -- auto, main, moon, or dawn
         dark_variant = "moon", -- main, moon, or dawn
         dim_inactive_windows = false,
         extend_background_behind_borders = true,
@@ -54,7 +56,7 @@ return {
         enable = {
           terminal = true,
           legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-          migrations = true,      -- Handle deprecated options automatically
+          migrations = true,        -- Handle deprecated options automatically
         },
 
         styles = {
@@ -94,10 +96,6 @@ return {
           h6 = "foam",
         },
       })
-      -- vim.cmd("colorscheme rose-pine")
-      -- vim.cmd("colorscheme rose-pine-main")
-      vim.cmd("colorscheme rose-pine-moon")
-      -- vim.cmd("colorscheme rose-pine-dawn")
     end
   },
   {
@@ -112,4 +110,9 @@ return {
       }
     end,
   },
+  {
+    'fenetikm/falcon',
+  }
 }
+
+return config

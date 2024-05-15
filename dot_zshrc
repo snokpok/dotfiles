@@ -72,6 +72,8 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git zsh-autosuggestions)
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#666668,bold"
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -179,3 +181,4 @@ fpath+=~/.zfunc
 autoload -U is-at-least
 
 eval "$(~/.local/bin/mise activate zsh)"
+source $HOME/falcon.zsh

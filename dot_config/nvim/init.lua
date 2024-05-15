@@ -50,6 +50,11 @@ require('telescope').setup {
       },
     },
   },
+  pickers = {
+    oldfiles = {
+      cwd_only = true,
+    }
+  },
 }
 
 -- Enable telescope fzf native, if installed
@@ -108,6 +113,13 @@ local function telescope_live_grep_open_files()
     prompt_title = 'Live Grep in Open Files',
   }
 end
+
+local function telescope_oldfiles_current_dir()
+  require('telescope.builtin').oldfiles({
+    cwd = vim.fn.expand('%:p:h')
+  })
+end
+
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
@@ -118,6 +130,7 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>so', telescope_oldfiles_current_dir, {desc='[S]earch [O]ldfiles'})
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -347,6 +360,11 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+-- hide lsp inline text
+vim.diagnostic.config({
+  virtual_text = false,
+})
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
