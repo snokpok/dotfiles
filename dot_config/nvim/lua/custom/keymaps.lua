@@ -16,3 +16,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
     desc = "Toggle Spectre"
 })
+
+vim.keymap.set('n', '<Tab>', '<cmd>bn<CR>')
+vim.keymap.set('n', '<S-Tab>', '<cmd>bp<CR>')
+vim.keymap.set('n', '<leader>x', '<cmd>bd<CR>')
+
+vim.keymap.set("n", "<leader>lg",  "<cmd>LazyGit<cr>", {desc = "LazyGit"})

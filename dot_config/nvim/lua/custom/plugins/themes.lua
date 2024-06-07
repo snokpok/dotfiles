@@ -1,29 +1,13 @@
 local config = {
   {
-    'f-person/auto-dark-mode.nvim',
-    config = function()
-      require('auto-dark-mode').setup {
-        update_interval = 1000,
-        set_dark_mode = function()
-          vim.api.nvim_set_option('background', 'dark')
-	  vim.cmd("colorscheme no-clown-fiesta")
-        end,
-        set_light_mode = function()
-          vim.cmd('colorscheme vscode_modern')
-          vim.api.nvim_set_option('background', 'light')
-        end,
-      }
-    end,
-  },
-  {
     'aktersnurra/no-clown-fiesta.nvim',
-    priority = 1000,
     lazy = false,
+    priority = 1000,
     config = function()
       require('no-clown-fiesta').setup {
         transparent = true, -- Enable this to disable the bg color
       }
-      require('no-clown-fiesta').load()
+      vim.cmd.colorscheme('no-clown-fiesta')
     end,
   },
   {
@@ -112,7 +96,7 @@ local config = {
   },
   {
     'fenetikm/falcon',
-  }
+  },
 }
 
 return config

@@ -60,24 +60,11 @@ return {
      ╯╰╯╰─╯╰─╯ ╰╯ ┴┴ ┴
         ]]
 
-      -- using the mini plugins
-      require('mini.sessions').setup {
-        -- Whether to read latest session if Neovim opened without file arguments
-        autoread = false,
-        -- Whether to write current session before quitting Neovim
-        autowrite = true,
-        -- Directory where global sessions are stored (use `''` to disable)
-        directory = '~/.vim/sessions', --<"session" subdir of user data directory from |stdpath()|>,
-        -- File for local session (use `''` to disable)
-        file = '',                     -- 'Session.vim',
-      }
-
       local starter = require 'mini.starter'
       starter.setup {
         -- evaluate_single = true,
         items = {
           starter.sections.telescope(),
-          starter.sections.sessions(77, true),
           starter.sections.builtin_actions(),
           starter.sections.recent_files(10, true),
           starter.sections.recent_files(10, false),
@@ -103,15 +90,37 @@ return {
       }
     end
   },
-  {
-    "supermaven-inc/supermaven-nvim",
-    config = function()
-      require("supermaven-nvim").setup({})
-    end,
-  },
+  -- {
+  --   "supermaven-inc/supermaven-nvim",
+  --   config = function()
+  --     require("supermaven-nvim").setup({})
+  --   end,
+  -- },
   {
     "tpope/vim-dadbod",
   },
   { "kristijanhusak/vim-dadbod-completion" },
   { "kristijanhusak/vim-dadbod-ui" },
+  {
+    'akinsho/bufferline.nvim',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require("bufferline").setup {}
+    end
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  }
 }
