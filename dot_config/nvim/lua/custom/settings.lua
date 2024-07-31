@@ -52,3 +52,5 @@ vim.o.relativenumber = true
 -- cursorline
 vim.wo.cursorline = true
 
+-- split vertical to the right always
+vim.o.splitright = true

@@ -16,11 +16,6 @@ return {
   {
     'nvim-tree/nvim-tree.lua',
     config = function()
-      local gwidth = vim.api.nvim_list_uis()[1].width
-      local gheight = vim.api.nvim_list_uis()[1].height
-      local width = 100
-      local height = 40
-
       require('nvim-tree').setup {
         disable_netrw = true,
         hijack_netrw = true,
@@ -33,16 +28,17 @@ return {
         view = {
           centralize_selection = true,
           side = 'right',
-          float = {
-            enable = true,
-            open_win_config = {
-              relative = 'editor',
-              width = width,
-              height = height,
-              row = (gheight - height) * 0.4,
-              col = (gwidth - width) * 0.5,
-            },
-          },
+          width = 80
+          -- float = {
+          --   enable = true,
+          --   open_win_config = {
+          --     relative = 'editor',
+          --     width = width,
+          --     height = height,
+          --     row = (gheight - height) * 0.4,
+          --     col = (gwidth - width) * 0.5,
+          --   },
+          -- },
         },
       }
 
@@ -86,7 +82,8 @@ return {
     config = function()
       require('auto-session').setup {
         log_level = "error",
-        auto_session_suppress_dirs = { "~/", "~/Downloads" }
+        auto_session_suppress_dirs = { "~/", "~/Downloads" },
+        auto_session_use_git_branch = true
       }
     end
   },
@@ -122,5 +119,25 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+  },
+  {
+    'rhysd/conflict-marker.vim'
+  },
+  {
+    'levouh/tint.nvim',
+    config = function()
+      require('tint').setup({
+        tint = -60
+      })
+    end
+  },
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      -- calling `setup` is optional for customization
+      require("fzf-lua").setup({})
+    end
   }
 }

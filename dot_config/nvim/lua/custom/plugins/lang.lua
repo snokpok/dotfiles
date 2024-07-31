@@ -135,6 +135,7 @@ return {
           liquid = { 'prettier' },
           lua = { 'stylua' },
           python = { 'isort', 'black' },
+          sql = { 'sqlfmt', 'sql-formatter' }
         },
       }
     end,
